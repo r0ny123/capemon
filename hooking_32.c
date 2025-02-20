@@ -691,30 +691,6 @@ int hook_api(hook_t *h, int type)
 			type = HOOK_JMP_DIRECT;
 			addr = (unsigned char *)get_cdocument_write_addr(hmod);
 		}
-		else if (!strcmp(h->funcname, "WMI_ExecQuery")) {
-			type = HOOK_JMP_DIRECT;
-			addr = (unsigned char*)get_wmi_execquery_addr(hmod);
-		}
-		else if (!strcmp(h->funcname, "WMI_ExecMethod")) {
-			type = HOOK_JMP_DIRECT;
-			addr = (unsigned char*)get_wmi_execmethod_addr(hmod);
-		}
-		else if (!strcmp(h->funcname, "WMI_ExecQueryAsync")) {
-			type = HOOK_JMP_DIRECT;
-			addr = (unsigned char*)get_wmi_execqueryasync_addr(hmod);
-		}
-		else if (!strcmp(h->funcname, "WMI_ExecMethodAsync")) {
-			type = HOOK_JMP_DIRECT;
-			addr = (unsigned char*)get_wmi_execmethodasync_addr(hmod);
-		}
-		else if (!strcmp(h->funcname, "WMI_GetObject")) {
-			type = HOOK_JMP_DIRECT;
-			addr = (unsigned char*)get_wmi_getobject_addr(hmod);
-		}
-		else if (!strcmp(h->funcname, "WMI_GetObjectAsync")) {
-			type = HOOK_JMP_DIRECT;
-			addr = (unsigned char*)get_wmi_getobjectasync_addr(hmod);
-		}
 		else if (!wcscmp(h->library, L"combase")) {
 			PVOID getprocaddr = (PVOID)GetProcAddress(hmod, h->funcname);
 			addr = (unsigned char *)GetFunctionAddress(hmod, (PCHAR)h->funcname);

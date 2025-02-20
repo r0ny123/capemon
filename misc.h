@@ -237,13 +237,6 @@ ULONG_PTR get_olescript_compile_addr(HMODULE mod);
 ULONG_PTR get_olescript_parsescripttext_addr(HMODULE mod);
 ULONG_PTR get_vbscript_addr(HMODULE mod, const char * function);
 
-ULONG_PTR get_wmi_execquery_addr(HMODULE mod);
-ULONG_PTR get_wmi_execmethod_addr(HMODULE mod);
-ULONG_PTR get_wmi_execqueryasync_addr(HMODULE mod);
-ULONG_PTR get_wmi_execmethodasync_addr(HMODULE mod);
-ULONG_PTR get_wmi_getobject_addr(HMODULE mod);
-ULONG_PTR get_wmi_getobjectasync_addr(HMODULE mod);
-
 BOOL is_bytes_in_buf(PCHAR buf, ULONG len, PCHAR memstr, ULONG memlen, ULONG maxsearchbytes);
 void replace_string_in_buf(PCHAR buf, ULONG len, PCHAR findstr, PCHAR repstr);
 void replace_wstring_in_buf(PWCHAR buf, ULONG len, PWCHAR findstr, PWCHAR repstr);

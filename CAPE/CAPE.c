@@ -698,6 +698,12 @@ PVOID GetFunctionByName(HMODULE ModuleBase, PCHAR FunctionName)
 	const char *YaraFunctions[] =
 	{
 		"LdrpCallInitRoutine",
+		"WMI_ExecQuery",
+		"WMI_ExecMethod",
+		"WMI_ExecQueryAsync",
+		"WMI_ExecMethodAsync",
+		"WMI_GetObject",
+		"WMI_GetObjectAsync",
 	};
 
 	for (int i = 0; i < sizeof(YaraFunctions) / sizeof(YaraFunctions[0]); i++)

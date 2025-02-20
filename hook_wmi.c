@@ -1,7 +1,6 @@
 #include "log.h"
 #include "misc.h"
 
-
 HOOKDEF(HRESULT, WINAPI, WMI_Get,
 	PVOID		_this,
 	LPCWSTR		wszName,
@@ -11,21 +10,9 @@ HOOKDEF(HRESULT, WINAPI, WMI_Get,
 	LONG*		plFlavor
 ) {
 	HRESULT ret;
-	lasterror_t lasterror;
-
 	ret = Old_WMI_Get(_this, wszName, lFlags, pVal, pType, plFlavor);
-	get_lasterrors(&lasterror);
-	__try {
-		if (wcscmp(wszName, L"__GENUS") && wcscmp(wszName, L"__PATH") && wcscmp(wszName, L"__RELPATH") && wcscmp(wszName, L"__SUPERCLASS") && wcscmp(wszName, L"SECURITY_DESCRIPTOR") && wcscmp(wszName, L"__NAMESPACE") && wcscmp(wszName, L"__CLASS")) {
-			// Don't log spammy property names
-			LOQ_hresult("system", "un", "Name", wszName, "Value", pVal);
-		}
-	}
-	__except (EXCEPTION_EXECUTE_HANDLER) {
-			;
-	}
-
-	set_lasterrors(&lasterror);
+	LOQ_hresult("system", "u", "Name", wszName);
+	//LOQ_hresult("system", "un", "Name", wszName, "Value", pVal);
 	return ret;
 }
 
@@ -85,15 +72,18 @@ HOOKDEF_NOTAIL(WINAPI, WMI_ExecMethodAsync,
 }
 
 HOOKDEF_NOTAIL(WINAPI, WMI_GetObject,
-	PVOID		_this,
-	const BSTR	strObjectPath,
-	long		lFlags,
-	PVOID		pCtx,
-	PVOID*		ppObject,
-	PVOID*		ppCallResult
+	PVOID           _this,
+	const BSTR      strObjectPath,
+	long            lFlags,
+	PVOID           pCtx,
+	PVOID*          ppObject,
+	PVOID*          ppCallResult
 ) {
 	HRESULT ret = 0;
-	LOQ_hresult("system", "u", "ObjectPath", strObjectPath);
+	if (strObjectPath && SysStringLen(strObjectPath) > 0)
+		LOQ_hresult("system", "u", "ObjectPath", strObjectPath);
+	else
+		LOQ_hresult("system", "u", "ObjectPath", L"[NULL or Empty]");
 	return 0;
 }
 

@@ -39,7 +39,7 @@ void disable_tail_call_optimization(void)
 	&New_##funcname, (void **) &Old_##funcname, NULL, FALSE, FALSE, 0, FALSE}
 
 #define HOOK_WITHNAME(library, funcname, mangled) {L###library, mangled, NULL, NULL, \
-    &New_##funcname, (void **) &Old_##funcname, NULL, FALSE, FALSE, 0, FALSE, 0, FALSE, FALSE, 0, 0}
+    &New_##funcname, (void **) &Old_##funcname, NULL, FALSE, FALSE, 0, FALSE}
 
 #define HOOK_SPECIAL(library, funcname) {L###library, #funcname, NULL, NULL, \
 	&New_##funcname, (void **) &Old_##funcname, NULL, TRUE, FALSE, 0, FALSE}
